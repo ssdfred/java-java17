@@ -31,7 +31,7 @@ public class Stream_01_Test {
 		List<Pizza> pizzas = new Data().getPizzas();
 
 		// TODO récupérer la liste des pizzas dont le prix est >= 1300
-		List<Pizza> result = pizzas.stream().filter(pizza -> pizza.getPrice() >= 1300).collect(Collectors.toList());
+		List<Pizza> result = pizzas.stream().filter(pizza -> pizza.getPrice() >= 1300).toList();
 		
 		
 
@@ -95,7 +95,7 @@ public class Stream_01_Test {
 		List<Order> orders = new Data().getOrders();
 
 		// TODO récupérer une commande faite par un client dont le prénom est "Sophie"
-		Optional<Order> result = orders.stream().filter(order -> "Sophie".equals(order.getCustomer().getFirstname())).findFirst();
+		Optional<Order> result = orders.stream().filter(order -> order.getCustomer().getFirstname().equals("Sophie")).findFirst();
 
 		assertThat(result.isPresent(), is(false));
 	}

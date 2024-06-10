@@ -31,7 +31,7 @@ public class Stream_03_Test {
 		List<Order> orders = new Data().getOrders();
 
 		// TODO Retrouver la commande avec le prix le plus élevé
-		Optional<Order> result = orders.stream().collect(Collectors.maxBy(Comparator.comparingDouble(order -> order.getPrice())));
+		Optional<Order> result = orders.stream().max(Comparator.comparingDouble(order -> order.getPrice()));
 		
 
 		assertThat(result.isPresent(), is(true));
@@ -47,7 +47,7 @@ public class Stream_03_Test {
 		List<Order> orders = new Data().getOrders();
 
 		// TODO Retrouver la commande avec le prix le moins élevé
-		Optional<Order> result = orders.stream().collect(Collectors.minBy(Comparator.comparingDouble(order -> order.getPrice())));
+		Optional<Order> result = orders.stream().min(Comparator.comparingDouble(order -> order.getPrice()));
 
 		assertThat(result.isPresent(), is(true));
 		assertThat(result.get().getPrice(), is(1000.0));
@@ -74,7 +74,7 @@ public class Stream_03_Test {
 		List<Order> orders = new Data().getOrders();
 
 		// TODO Extraire la liste des pizzas de toutes les commandes
-		List<Pizza> result = orders.stream().flatMap(order -> order.getPizzas().stream()).collect(Collectors.toList());
+		List<Pizza> result = orders.stream().flatMap(order -> order.getPizzas().stream()).toList();
 
 		assertThat(result.size(), is(9));
 	}
@@ -85,7 +85,7 @@ public class Stream_03_Test {
 		List<Order> orders = new Data().getOrders();
 
 		// TODO Extraire la liste des différentes pizzas de toutes les commandes
-		List<Pizza> result = orders.stream().flatMap(o -> o.getPizzas().stream()).distinct().collect(Collectors.toList());
+		List<Pizza> result = orders.stream().flatMap(o -> o.getPizzas().stream()).distinct().toList();
 
 		assertThat(result.size(), is(4));
 	}
@@ -97,7 +97,7 @@ public class Stream_03_Test {
 
 		// TODO construire une Map <Client, Commandes effectuées par le client
 		Map<Customer, List<Order>> result = orders.stream().collect(Collectors.groupingBy(o -> o.getCustomer()));
-
+		
 		assertThat(result.size(), is(2));
 		assertThat(result.get(new Customer(1)), hasSize(4));
 		assertThat(result.get(new Customer(2)), hasSize(4));
