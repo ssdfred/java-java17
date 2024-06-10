@@ -18,15 +18,15 @@ public class DateAndTime_04_Test {
     public void test_localDateTime_of() {
 
         // TODO créer un objet LocalDateTime à la date heure 12h00m00s 01/01/2018
-        LocalDateTime result = null;
+        LocalDateTime result = LocalDateTime.of(2018, 01, 01, 12, 00, 00);
 
         // TODO valoriser les différentes variables afin de rendre le test passant
-        int hour = 0;
-        int minutes = 0;
-        int second = 0;
-        int year = 0;
-        Month month = null;
-        int dayOfMonth = 0;
+        int hour = result.getHour();
+        int minutes = result.getMinute();
+        int second = result.getSecond();
+        int year = result.getYear();
+        Month month = result.getMonth();
+        int dayOfMonth = result.getDayOfMonth();
 
         assertThat(hour, is(12));
         assertThat(minutes, is(0));
